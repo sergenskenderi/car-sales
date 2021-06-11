@@ -23,10 +23,9 @@ export const carFeaturesReduces  = (state = initialState , action) => {
             }
         case REMOVE_FEATURE : 
         {
-        console.log("Test"); 
         return {
             ...state ,
-            car : [],
+            car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : state.car.features.filter(item => item !== action.payload)} , 
             additionalPrice : state.additionalPrice - action.payload.price
           }
         }
