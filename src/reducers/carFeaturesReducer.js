@@ -3,13 +3,47 @@ import {REMOVE_FEATURE} from "../actions/carFeaturesActions";
 
 const initialState = {
     additionalPrice: 0,
-    car: {
+    car: [
+    {
       price: 26395,
       name: '2019 Ford Mustang',
       image:
         'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
-      features: []
+      features: [],
+      additionalFeatures: [
+        { id: 1, name: 'V-6 engine', price: 1500 },
+        { id: 2, name: 'Racing detail package', price: 1500 },
+        { id: 3, name: 'Premium sound system', price: 500 },
+        { id: 4, name: 'Rear spoiler', price: 250 }
+      ]
+    },
+    {
+      price: 12000,
+      name: '2003 Ford Focus',
+      image:
+        'https://img.drivemag.net/media/default/0001/98/2019-ford-focus-st-8302-default-large.jpeg',
+      features: [],
+      additionalFeatures: [
+        { id: 1, name: 'V-6 engine', price: 1000 },
+        { id: 2, name: 'Racing detail package', price: 1200 },
+        { id: 3, name: 'Premium sound system', price: 400 },
+        { id: 4, name: 'Rear spoiler', price: 200 }
+      ]
+    },
+    {
+      price: 17000,
+      name: '2010 Ford Fiesta',
+      image:
+        'https://upload.wikimedia.org/wikipedia/commons/f/f5/2010_Ford_Fiesta_Edge_1.2_Front.jpg',
+      features: [],
+      additionalFeatures: [
+        { id: 1, name: 'V-6 engine', price: 1200 },
+        { id: 2, name: 'Racing detail package', price: 1000 },
+        { id: 3, name: 'Premium sound system', price: 470 },
+        { id: 4, name: 'Rear spoiler', price: 235 }
+      ]
     }
+    ]
 };
 
 
@@ -18,14 +52,14 @@ export const carFeaturesReduces  = (state = initialState , action) => {
         case ADD_NEW_FEATURE :
             return {
               ...state ,
-              car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : [...state.car.features ,action.payload]},
+              car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : [...state.car.features ,action.payload] , additionalFeatures : state.car.additionalFeatures},
               additionalPrice : state.additionalPrice + action.payload.price
             }
         case REMOVE_FEATURE : 
         {
         return {
             ...state ,
-            car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : state.car.features.filter(item => item !== action.payload)} , 
+            car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : state.car.features.filter(item => item !== action.payload) , additionalFeatures : state.car.additionalFeatures} , 
             additionalPrice : state.additionalPrice - action.payload.price
           }
         }
