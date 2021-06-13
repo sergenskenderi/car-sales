@@ -2,7 +2,6 @@ import {ADD_NEW_FEATURE } from "../actions/carFeaturesActions";
 import {REMOVE_FEATURE} from "../actions/carFeaturesActions";
 
 const initialState = {
-    additionalPrice: 0,
     car: [
     {
       price: 26395,
@@ -15,7 +14,8 @@ const initialState = {
         { id: 2, name: 'Racing detail package', price: 1500 },
         { id: 3, name: 'Premium sound system', price: 500 },
         { id: 4, name: 'Rear spoiler', price: 250 }
-      ]
+      ],
+      additionalPrice: 0,
     },
     {
       price: 12000,
@@ -28,7 +28,8 @@ const initialState = {
         { id: 2, name: 'Racing detail package', price: 1200 },
         { id: 3, name: 'Premium sound system', price: 400 },
         { id: 4, name: 'Rear spoiler', price: 200 }
-      ]
+      ],
+      additionalPrice: 0,
     },
     {
       price: 17000,
@@ -41,7 +42,8 @@ const initialState = {
         { id: 2, name: 'Racing detail package', price: 1000 },
         { id: 3, name: 'Premium sound system', price: 470 },
         { id: 4, name: 'Rear spoiler', price: 235 }
-      ]
+      ],
+      additionalPrice: 0,
     }
     ]
 };
@@ -50,10 +52,15 @@ const initialState = {
 export const carFeaturesReduces  = (state = initialState , action) => {
     switch(action.type){
         case ADD_NEW_FEATURE :
+            const newCar = state.car.map( (item) => {
+              if(item.additionalFeatures.find(addFeature => addFeature === action.payload)){
+                item.features.push(action.payload);
+                item.additionalPrice = item.additionalPrice + action.payload.price;
+              }
+              return item;
+            }) 
             return {
-              ...state ,
-              car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : [...state.car.features ,action.payload] , additionalFeatures : state.car.additionalFeatures},
-              additionalPrice : state.additionalPrice + action.payload.price
+              car : newCar
             }
         case REMOVE_FEATURE : 
         {

@@ -6,6 +6,7 @@ import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
 import { useParams } from 'react-router-dom';
 
+
 const Car = (props) => {
   const {name} = useParams();
   const car = props.car.find(item => item.name === name);
@@ -13,10 +14,10 @@ const Car = (props) => {
     <div className="boxes">
       <div className="box">
         <Header car={car} />
-        <AddedFeatures />
+        <AddedFeatures car={car} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={car.additionalFeatures} />
+        <AdditionalFeatures car={car}/>
         <Total car={car} additionalPrice={props.additionalPrice} />
       </div>
     </div>
