@@ -6,7 +6,7 @@ import Car from './Car';
 
 const App = (props) => {
   return (
-    <div className="boxes">
+    <div>
       <Router>
         <Switch>
           <Route exact path="/">
