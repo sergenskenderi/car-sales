@@ -5,9 +5,9 @@ import {addFeature} from "../actions/carFeaturesActions";
 const AdditionalFeature = props => {
   var added = false;
   
-  if(props.car.features.find(item => item === props.feature)){
+  if(props.selectedCar.features.find(item => item === props.feature)){
     added = true;
-    console.log("props.car.features",props.car.features);
+    console.log("props.car.features",props.selectedCar.features);
     console.log("props.feature.name",props.feature.name);
   }
 
@@ -20,4 +20,10 @@ const AdditionalFeature = props => {
   );
 };
 
-export default connect(null , {addFeature})(AdditionalFeature);
+const mapStateToProps = (state) => {
+	return {
+	car : state.car,
+	}
+}
+
+export default connect(mapStateToProps , {addFeature})(AdditionalFeature);

@@ -17,7 +17,7 @@ const Car = (props) => {
         <AddedFeatures car={car} />
       </div>
       <div className="box">
-        <AdditionalFeatures car={car}/>
+        <AdditionalFeatures selectedCar={car}/>
         <Total car={car} additionalPrice={props.additionalPrice} />
       </div>
     </div>

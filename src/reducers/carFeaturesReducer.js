@@ -1,4 +1,4 @@
-import {ADD_NEW_FEATURE } from "../actions/carFeaturesActions";
+import {ADD_NEW_FEATURE, removeFeature } from "../actions/carFeaturesActions";
 import {REMOVE_FEATURE} from "../actions/carFeaturesActions";
 
 const initialState = {
@@ -64,10 +64,15 @@ export const carFeaturesReduces  = (state = initialState , action) => {
             }
         case REMOVE_FEATURE : 
         {
+          const newCar = state.car.map( (item) => {
+            if(item.features.find(removeFeature => removeFeature === action.payload)){
+              item.features = item.features.filter( remove => remove !== action.payload);
+              item.additionalPrice = item.additionalPrice - action.payload.price;
+            }
+            return item;
+          }) 
         return {
-            ...state ,
-            car : {price : state.car.price , name : state.car.name , image : state.car.image ,features : state.car.features.filter(item => item !== action.payload) , additionalFeatures : state.car.additionalFeatures} , 
-            additionalPrice : state.additionalPrice - action.payload.price
+          car : newCar
           }
         }
         default : 
